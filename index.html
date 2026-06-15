@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pipeline Diagnostic | PolyCraft</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0D1B2A;
+      color: white;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #F4A623;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      color: #B0C4DE;
+      margin-bottom: 30px;
+    }
+
+    .block {
+      background: #1B4F8A;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #F4A623;
+      border: none;
+      border-radius: 8px;
+      color: #0D1B2A;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: 0.6;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Pipeline Diagnostic</h1>
+    <div class="sub">Enter. Build. Own.</div>
+
+    <div class="block">
+      <div class="question">Where is your pipeline managed today?</div>
+      <select>
+        <option>CRM</option>
+        <option>Spreadsheet</option>
+        <option>WhatsApp / Email</option>
+        <option>Memory / Notes</option>
+        <option>Not centralized</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <div class="question">How confident are you that your pipeline reflects reality?</div>
+      <select>
+        <option>Very confident</option>
+        <option>Somewhat confident</option>
+        <option>Low confidence</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <div class="question">What happens to leads that don’t convert immediately?</div>
+      <select>
+        <option>Systematic follow-up</option>
+        <option>Occasionally followed up</option>
+        <option>Often forgotten</option>
+        <option>No process</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <div class="question">Where do opportunities usually disappear?</div>
+      <select>
+        <option>After first contact</option>
+        <option>After proposal</option>
+        <option>During follow-up</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <div class="question">What causes most breakdowns?</div>
+      <select>
+        <option>No follow-up system</option>
+        <option>Fragmented communication</option>
+        <option>No clear stages</option>
+        <option>No visibility</option>
+        <option>Pressure decisions</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <div class="question">Would you want a structural review if issues are found?</div>
+      <select>
+        <option>Yes</option>
+        <option>Maybe</option>
+        <option>Not now</option>
+      </select>
+    </div>
+
+    <button>Generate Pipeline Snapshot</button>
+
+    <div class="footer">
+      PolyCraft Diagnostic System
+    </div>
+
+  </div>
+
+</body>
+</html>
