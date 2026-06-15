@@ -3,185 +3,563 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pipeline Diagnostic | PolyCraft</title>
-
+  <title>Pipeline Diagnostic | PolyCraft Consulting</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-    const supabaseUrl = "YOUR_SUPABASE_URL";
-    const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-  </script>
-
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0D1B2A;
-      color: white;
+      background-color: #080E14;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0D1821;
+      border-bottom: 2px solid #F4A623;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-diamond {
+      width: 36px;
+      height: 36px;
+    }
+
+    .logo-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .logo-name span {
+      color: #F4A623;
+    }
+
+    .logo-tagline {
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: rgba(244,166,35,0.6);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0D1821 0%, #111E30 100%);
+      padding: 60px 40px 50px;
+      text-align: center;
+      border-bottom: 1px solid #1E2D3D;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #F4A623;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 span {
+      color: #F4A623;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #8899AA;
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .time-badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: #0D1821;
+      border: 1px solid #1E2D3D;
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 12px;
+      color: #8899AA;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 24px 60px;
     }
 
-    h1 {
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
       color: #F4A623;
-      font-size: 34px;
-      margin-bottom: 5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
     }
 
-    .sub {
-      color: #B0C4DE;
-      margin-bottom: 30px;
-    }
-
-    .block {
-      background: #1B4F8A;
-      padding: 20px;
+    .question-block {
+      background: #0D1821;
+      border: 1px solid #1E2D3D;
       border-radius: 10px;
-      margin-bottom: 15px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
     }
 
-    .question {
-      font-weight: bold;
-      margin-bottom: 10px;
+    .question-block:focus-within {
+      border-color: #F4A623;
+    }
+
+    .question-number {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #F4A623;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .question-hint {
+      font-size: 12px;
+      color: #8899AA;
+      margin-bottom: 14px;
+      line-height: 1.5;
     }
 
     select {
       width: 100%;
-      padding: 10px;
+      padding: 12px 14px;
       border-radius: 6px;
-      border: none;
+      border: 1px solid #1E2D3D;
+      background: #080E14;
+      color: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F4A623' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
     }
 
-    button {
+    select:focus {
+      outline: none;
+      border-color: #F4A623;
+    }
+
+    .name-email-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .input-group {
+      background: #0D1821;
+      border: 1px solid #1E2D3D;
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .input-group:focus-within {
+      border-color: #F4A623;
+    }
+
+    .input-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
       width: 100%;
-      padding: 16px;
+      padding: 12px 14px;
+      border-radius: 6px;
+      border: 1px solid #1E2D3D;
+      background: #080E14;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #F4A623;
+    }
+
+    input::placeholder {
+      color: #445566;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1E2D3D;
+      margin: 32px 0;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
       background: #F4A623;
       border: none;
       border-radius: 8px;
-      color: #0D1B2A;
-      font-weight: bold;
+      color: #080E14;
+      font-weight: 700;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.5px;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .submit-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 12px;
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
       opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .privacy-note {
       text-align: center;
+      font-size: 11px;
+      color: #445566;
+      margin-top: 14px;
+    }
+
+    /* Success screen */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(244,166,35,0.1);
+      border: 2px solid #F4A623;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 28px;
+    }
+
+    .success-screen h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .success-screen p {
+      font-size: 15px;
+      color: #8899AA;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .success-highlight {
+      background: #0D1821;
+      border: 1px solid #1E2D3D;
+      border-left: 3px solid #F4A623;
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-align: left;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    .success-highlight p {
+      font-size: 14px;
+      color: #8899AA;
+      margin: 0;
+    }
+
+    .success-highlight strong {
+      color: #ffffff;
+    }
+
+    footer {
+      background: #0D1821;
+      border-top: 1px solid #1E2D3D;
+      padding: 24px 40px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: #445566;
+    }
+
+    footer span {
+      color: #F4A623;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 26px; }
+      .name-email-row { grid-template-columns: 1fr; }
+      header { padding: 16px 20px; }
+      .hero { padding: 40px 20px; }
     }
   </style>
 </head>
-
 <body>
+
+<header>
+  <div class="logo">
+    <svg class="logo-diamond" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,0 30,30 0,30" fill="#1B4F8A"/>
+      <polygon points="30,0 60,30 30,30" fill="#F4A623"/>
+      <polygon points="0,30 30,60 30,30" fill="#2E75C8"/>
+      <polygon points="60,30 30,60 30,30" fill="#1B4F8A" opacity="0.65"/>
+    </svg>
+    <div>
+      <div class="logo-name">Poly<span>Craft</span></div>
+      <span class="logo-tagline">Enter. Build. Own.</span>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-label">Free Commercial Diagnostic</div>
+  <h1>Is your pipeline built to grow<br><span>without depending on you?</span></h1>
+  <p>Six questions. Two minutes. A clear picture of where your commercial engine is breaking down — and what to do about it.</p>
+  <div class="time-badge">Takes 2 minutes &nbsp;·&nbsp; No signup required &nbsp;·&nbsp; Free</div>
+</div>
 
 <div class="container">
 
-  <h1>Pipeline Diagnostic</h1>
-  <div class="sub">Enter. Build. Own.</div>
+  <!-- Form -->
+  <div id="diagnostic-form">
 
-  <div class="block">
-    <div class="question">Where is your pipeline managed today?</div>
-    <select id="q1">
-      <option>CRM</option>
-      <option>Spreadsheet</option>
-      <option>WhatsApp / Email</option>
-      <option>Memory / Notes</option>
-      <option>Not centralized</option>
-    </select>
+    <div class="section-label">Your Pipeline — 6 Questions</div>
+
+    <div class="question-block">
+      <div class="question-number">Question 01</div>
+      <div class="question-text">Where is your pipeline managed today?</div>
+      <div class="question-hint">Be honest. Most founders start here.</div>
+      <select id="q1">
+        <option value="">Select an answer...</option>
+        <option value="CRM">CRM (HubSpot, Pipedrive, or similar)</option>
+        <option value="Spreadsheet">Spreadsheet</option>
+        <option value="WhatsApp / Email">WhatsApp or Email threads</option>
+        <option value="Memory / Notes">Memory and personal notes</option>
+        <option value="Not centralized">Not centralized — scattered across tools</option>
+      </select>
+    </div>
+
+    <div class="question-block">
+      <div class="question-number">Question 02</div>
+      <div class="question-text">How confident are you that your pipeline reflects what is actually happening?</div>
+      <div class="question-hint">Not what you hope — what is real right now.</div>
+      <select id="q2">
+        <option value="">Select an answer...</option>
+        <option value="Very confident">Very confident — I can see everything clearly</option>
+        <option value="Somewhat confident">Somewhat confident — a few blind spots</option>
+        <option value="Low confidence">Low confidence — I often find out too late</option>
+        <option value="Not sure">Not sure — I don't have full visibility</option>
+      </select>
+    </div>
+
+    <div class="question-block">
+      <div class="question-number">Question 03</div>
+      <div class="question-text">What happens to leads that do not convert immediately?</div>
+      <div class="question-hint">This is where most pipelines quietly collapse.</div>
+      <select id="q3">
+        <option value="">Select an answer...</option>
+        <option value="Systematic follow-up">Systematic follow-up — we have a process</option>
+        <option value="Occasional follow-up">Occasional follow-up — when I remember</option>
+        <option value="Often forgotten">Often forgotten — we move on</option>
+        <option value="No process">No process — it depends on the day</option>
+      </select>
+    </div>
+
+    <div class="question-block">
+      <div class="question-number">Question 04</div>
+      <div class="question-text">Where do opportunities usually disappear in your pipeline?</div>
+      <div class="question-hint">Every pipeline has a leak. Where is yours?</div>
+      <select id="q4">
+        <option value="">Select an answer...</option>
+        <option value="After first contact">After first contact — they go quiet</option>
+        <option value="After proposal">After proposal — no decision</option>
+        <option value="During follow-up">During follow-up — we lose momentum</option>
+        <option value="Not sure">Not sure — I cannot track where they go</option>
+      </select>
+    </div>
+
+    <div class="question-block">
+      <div class="question-number">Question 05</div>
+      <div class="question-text">What causes most commercial breakdowns in your business?</div>
+      <div class="question-hint">Pick the one that feels most familiar.</div>
+      <select id="q5">
+        <option value="">Select an answer...</option>
+        <option value="No follow-up system">No structured follow-up system</option>
+        <option value="Fragmented communication">Communication fragmented across tools</option>
+        <option value="No clear stages">No clear pipeline stages or ownership</option>
+        <option value="No visibility">No visibility on what is moving</option>
+        <option value="Founder dependency">Everything depends on me personally</option>
+      </select>
+    </div>
+
+    <div class="question-block">
+      <div class="question-number">Question 06</div>
+      <div class="question-text">If the diagnostic identifies structural issues, would you want to discuss a fix?</div>
+      <div class="question-hint">No obligation. Just a conversation.</div>
+      <select id="q6">
+        <option value="">Select an answer...</option>
+        <option value="Yes">Yes — I want to understand what needs to change</option>
+        <option value="Maybe">Maybe — depends on what you find</option>
+        <option value="Not now">Not right now</option>
+      </select>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Where to send your results</div>
+
+    <div class="name-email-row">
+      <div class="input-group">
+        <label class="input-label" for="fname">Your Name</label>
+        <input type="text" id="fname" placeholder="First name" />
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="femail">Email Address</label>
+        <input type="email" id="femail" placeholder="your@email.com" />
+      </div>
+    </div>
+
+    <div class="input-group" style="margin-bottom:16px;">
+      <label class="input-label" for="fcompany">Company Name <span style="font-weight:400;color:#8899AA;">(optional)</span></label>
+      <input type="text" id="fcompany" placeholder="Your company" />
+    </div>
+
+    <button class="submit-btn" onclick="submitForm()" id="submit-btn">
+      Generate My Pipeline Snapshot →
+    </button>
+
+    <p class="privacy-note">Your information is never shared. Used only to send your diagnostic results.</p>
+
   </div>
 
-  <div class="block">
-    <div class="question">How confident are you that your pipeline reflects reality?</div>
-    <select id="q2">
-      <option>Very confident</option>
-      <option>Somewhat confident</option>
-      <option>Low confidence</option>
-      <option>Not sure</option>
-    </select>
-  </div>
-
-  <div class="block">
-    <div class="question">What happens to leads that don’t convert immediately?</div>
-    <select id="q3">
-      <option>Systematic follow-up</option>
-      <option>Occasional follow-up</option>
-      <option>Often forgotten</option>
-      <option>No process</option>
-    </select>
-  </div>
-
-  <div class="block">
-    <div class="question">Where do opportunities usually disappear?</div>
-    <select id="q4">
-      <option>After first contact</option>
-      <option>After proposal</option>
-      <option>During follow-up</option>
-      <option>Not sure</option>
-    </select>
-  </div>
-
-  <div class="block">
-    <div class="question">What causes most breakdowns?</div>
-    <select id="q5">
-      <option>No follow-up system</option>
-      <option>Fragmented communication</option>
-      <option>No clear stages</option>
-      <option>No visibility</option>
-      <option>Pressure decisions</option>
-    </select>
-  </div>
-
-  <div class="block">
-    <div class="question">Would you want a structural review if issues are found?</div>
-    <select id="q6">
-      <option>Yes</option>
-      <option>Maybe</option>
-      <option>Not now</option>
-    </select>
-  </div>
-
-  <button onclick="submitForm()">Generate Pipeline Snapshot</button>
-
-  <div class="footer">
-    PolyCraft Diagnostic System
+  <!-- Success Screen -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✓</div>
+    <h2>Diagnostic received.</h2>
+    <p>Dany Kanzari will review your pipeline structure and send you a personal response within 24 hours.</p>
+    <div class="success-highlight">
+      <p><strong>What happens next:</strong><br><br>
+      You will receive a short summary of what the diagnostic found in your pipeline — where the gaps are, where opportunities are being lost, and what a practical fix looks like for your specific situation.</p>
+    </div>
+    <p style="font-size:13px;color:#445566;">No pitch. No automated email sequence. A real response from a real person.</p>
   </div>
 
 </div>
 
+<footer>
+  <p>PolyCraft Consulting &nbsp;·&nbsp; <span>Enter. Build. Own.</span> &nbsp;·&nbsp; dkanzari@gmail.com</p>
+</footer>
+
 <script>
-async function submitForm() {
+  const supabaseUrl = "https://wsqvbdpfzieawtfdvopg.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndzcXZiZHBmemllYXd0ZmR2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NTQ5NTMsImV4cCI6MjA5NzEzMDk1M30.ZFdgaufyL0TbYq0b7WwdPvSeZNRMSitioQMRuWbUcYM";
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-  const data = {
-    pipeline_location: document.getElementById("q1").value,
-    pipeline_confidence: document.getElementById("q2").value,
-    followup_process: document.getElementById("q3").value,
-    opportunity_loss_point: document.getElementById("q4").value,
-    breakdown_reason: document.getElementById("q5").value,
-    wants_review: document.getElementById("q6").value
-  };
+  async function submitForm() {
+    const q1 = document.getElementById("q1").value;
+    const q2 = document.getElementById("q2").value;
+    const q3 = document.getElementById("q3").value;
+    const q4 = document.getElementById("q4").value;
+    const q5 = document.getElementById("q5").value;
+    const q6 = document.getElementById("q6").value;
+    const name = document.getElementById("fname").value.trim();
+    const email = document.getElementById("femail").value.trim();
+    const company = document.getElementById("fcompany").value.trim();
 
-  const { error } = await supabase
-    .from("pipeline_diagnostics")
-    .insert([data]);
+    if (!q1 || !q2 || !q3 || !q4 || !q5 || !q6) {
+      alert("Please answer all six questions before submitting.");
+      return;
+    }
 
-  if (error) {
-    alert("Submission failed. Try again.");
-    console.error(error);
-  } else {
-    alert("Diagnostic submitted. We will review your pipeline structure.");
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
+
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    const btn = document.getElementById("submit-btn");
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    const data = {
+      pipeline_location: q1,
+      pipeline_confidence: q2,
+      followup_process: q3,
+      opportunity_loss_point: q4,
+      breakdown_reason: q5,
+      wants_review: q6,
+      respondent_name: name,
+      respondent_email: email,
+      respondent_company: company || null
+    };
+
+    const { error } = await supabase
+      .from("pipeline_diagnostics")
+      .insert([data]);
+
+    if (error) {
+      btn.disabled = false;
+      btn.textContent = "Generate My Pipeline Snapshot →";
+      alert("Something went wrong. Please try again or email dkanzari@gmail.com directly.");
+      console.error(error);
+    } else {
+      document.getElementById("diagnostic-form").style.display = "none";
+      document.getElementById("success-screen").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
-}
 </script>
 
 </body>
