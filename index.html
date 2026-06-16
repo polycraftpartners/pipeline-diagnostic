@@ -223,11 +223,7 @@
       alert("Please enter your name.");
       return;
     }
-    if (!email || email.indexOf("@") === -1) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
+    
     var btn = document.getElementById("submit-btn");
     btn.disabled = true;
     btn.textContent = "Submitting...";
