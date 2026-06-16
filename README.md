@@ -7,3 +7,5 @@ A structured diagnostic system that maps how a founder’s pipeline behaves in r
 This system is part of PolyCraft’s revenue architecture approach.
 
 We enter the market. We build the relationships. We drive the revenue.
+The URL to use everywhere is:
+https://pipeline-diagnostic-five.vercel.app/
